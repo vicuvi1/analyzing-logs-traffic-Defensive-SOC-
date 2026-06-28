@@ -192,7 +192,12 @@ Scan_logs/
 ├── rules/                  # Detection rules (YAML)
 ├── samples/                # Demo log files
 ├── tools/
-│   └── send_test_syslog.py # UDP test sender for live stream demo
+│   └── send_test_syslog.py
+├── launcher/
+│   ├── launcher.py         # Bootstrap (GitHub sync + pip + streamlit)
+│   ├── build.ps1           # Builds SOCLogAnalyzer.exe
+│   └── create_icon.py
+├── dist/                   # Built exe (gitignored)
 └── README.md
 ```
 
@@ -239,6 +244,24 @@ streamlit run app.py
 ```
 
 The application opens at **http://localhost:8501**.
+
+### One-click Windows launcher (optional)
+
+A branded `SOCLogAnalyzer.exe` is available for double-click startup. On each run it:
+
+1. Downloads the latest code from GitHub `main`
+2. Installs/upgrades dependencies into `%LOCALAPPDATA%\SOCLogAnalyzer\venv`
+3. Starts Streamlit and opens your browser
+
+**Build the EXE:**
+
+```powershell
+.\launcher\build.ps1
+```
+
+Output: `dist\SOCLogAnalyzer.exe` (~8 MB). Copy to Desktop or pin to Start Menu.
+
+**Requirements:** Python 3.10+ on PATH + internet connection. Keep the console window open while using the app.
 
 ---
 
