@@ -1,0 +1,40 @@
+title: Web Directory Traversal and Path Injection
+id: 8f3c2a10-4b5d-4e9a-a1c2-3d4e5f607182
+status: experimental
+description: >
+  Detects directory traversal sequences and path injection attempts in HTTP
+  request URIs. Replaces hardcoded regex with a portable Sigma signature that
+  can be shared across SIEM platforms.
+author: SOC Log Analyzer
+date: 2024/03/15
+references:
+  - https://github.com/SigmaHQ/sigma
+logsource:
+  category: webserver
+  product:
+    - apache
+    - nginx
+detection:
+  selection_traversal:
+    request_path|contains:
+      - '../'
+      - '..\\'
+      - '%2e%2e'
+      - '..%2f'
+      - '%2f..%2f'
+  selection_sensitive:
+    request_path|contains:
+      - '/etc/passwd'
+      - '/etc/shadow'
+      - 'cmd.exe'
+      - '.env'
+  selection_regex:
+    request_path|re:
+      - '\.\./'
+      - '/\.\./'
+  condition: 1 of selection*
+level: critical
+tags:
+  - attack.initial_access
+  - attack.t1190
+  - web.path_traversal

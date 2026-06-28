@@ -1,0 +1,18 @@
+title: PCAP Port Scan Detection
+id: b4e2d3c5-6f7c-5b9d-0e1f-2a3b4c5d6e7f
+type: threshold
+description: >
+  Flags a source IP probing many destination ports within a short time window
+  in packet capture telemetry.
+level: high
+logsource:
+  category: pcap
+threshold:
+  group_by: source_ip
+  count_field: dest_port
+  count_mode: unique
+  window_seconds: 60
+  min_count: 10
+tags:
+  - attack.discovery
+  - attack.t1046

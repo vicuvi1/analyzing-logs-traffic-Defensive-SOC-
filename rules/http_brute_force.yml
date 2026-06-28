@@ -1,0 +1,18 @@
+title: HTTP Brute Force Detection
+id: a3f1c2d4-5e6b-4a8c-9d0e-1f2a3b4c5d6e
+type: threshold
+description: >
+  Detects credential brute-force attempts when a single IP generates many
+  HTTP 401/403 responses within a short sliding window.
+level: high
+logsource:
+  category: webserver
+threshold:
+  filter_field: status_code
+  filter_values: [401, 403]
+  group_by: source_ip
+  window_seconds: 300
+  min_count: 5
+tags:
+  - attack.credential_access
+  - attack.t1110

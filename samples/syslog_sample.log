@@ -1,0 +1,5 @@
+Mar 15 08:00:01 webserver sshd[4521]: Accepted publickey for deploy from 10.0.0.5 port 44122 ssh2
+Mar 15 08:02:15 webserver sshd[4522]: Failed password for invalid user admin from 203.0.113.77 port 54321 ssh2
+Mar 15 08:02:17 webserver sshd[4523]: Failed password for invalid user root from 203.0.113.77 port 54322 ssh2
+Mar 15 08:02:19 webserver sshd[4524]: Failed password for invalid user test from 203.0.113.77 port 54323 ssh2
+Mar 15 08:15:00 webserver kernel: [UFW BLOCK] IN=eth0 OUT= MAC= SRC=198.51.100.22 DST=10.0.0.1 PROTO=TCP SPT=45678 DPT=22

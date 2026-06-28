@@ -1,0 +1,22 @@
+title: Web Application Reconnaissance Probes
+id: 2a7b9c31-6d4e-4f8a-b2c1-9e0f1a2b3c4d
+status: experimental
+description: >
+  Detects common web application reconnaissance paths such as admin panels,
+  phpMyAdmin, and WordPress install endpoints.
+author: SOC Log Analyzer
+date: 2024/03/15
+logsource:
+  category: webserver
+detection:
+  selection_admin:
+    request_path|contains:
+      - 'wp-admin'
+      - 'phpmyadmin'
+      - 'wp-login.php'
+      - '/admin/config'
+  condition: selection_admin
+level: high
+tags:
+  - attack.discovery
+  - attack.t1595
